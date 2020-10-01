@@ -17,27 +17,29 @@ export default function Signup() {
 
     const isInvalid = firstName === '' || password === '' || emailAddress === '';
 
-    const handleSignup = (e) => {
-        e.preventDefault();
+    const handleSignup = (event) => {
+        event.preventDefault();
 
-        firebase
+        return firebase
             .auth()
-            .createUserWithEmailAndPassword(emailAddress,password)
-            .then((result) => {
-                result.user.updateProfile({
-                    displayName: firstName,
-                    photoURL : Math.floor(Math.random() * 5 + 1),
-                }).then(() => {
-                    history.push(ROUTES.BROWSE);
-                });
-            })
+            .createUserWithEmailAndPassword(emailAddress, password)
+            .then((result) =>
+                result.user
+                    .updateProfile({
+                        displayName: firstName,
+                        photoURL: Math.floor(Math.random() * 5) + 1,
+                    })
+                    .then(() => {
+                        history.push(ROUTES.BROWSE);
+                    })
+            )
             .catch((error) => {
                 setFirstName('');
                 setEmailAddress('');
                 setPassword('');
                 setError(error.message);
             });
-    }
+    };
 
     return (
         <React.Fragment>
@@ -47,6 +49,7 @@ export default function Signup() {
                     {error && <Form.Error>{error}</Form.Error>}
                     <Form.Base onSubmit={handleSignup} method="POST">
                         <Form.Input placeholder="First name" value={firstName} onChange={({ target }) => setFirstName(target.value)} />
+                        {firstName}
                         <Form.Input placeholder="Email address" value={emailAddress} onChange={({ target }) => setEmailAddress(target.value)} />
                         <Form.Input placeholder="Password" value={password} type="password" onChange={({ target }) => setPassword(target.value)} autoComplete="off" />
                         <Form.Submit disabled={isInvalid} type="submit">
