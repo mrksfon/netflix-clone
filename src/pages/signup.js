@@ -49,7 +49,6 @@ export default function Signup() {
                     {error && <Form.Error>{error}</Form.Error>}
                     <Form.Base onSubmit={handleSignup} method="POST">
                         <Form.Input placeholder="First name" value={firstName} onChange={({ target }) => setFirstName(target.value)} />
-                        {firstName}
                         <Form.Input placeholder="Email address" value={emailAddress} onChange={({ target }) => setEmailAddress(target.value)} />
                         <Form.Input placeholder="Password" value={password} type="password" onChange={({ target }) => setPassword(target.value)} autoComplete="off" />
                         <Form.Submit disabled={isInvalid} type="submit">
