@@ -129,7 +129,7 @@ export const PlayButton = styled.button`
     font-weight: bold;
     margin-top: 30px;
     cursor: pointer;
-    transition: background-color 2s ease;
+    transition: background-color 0.2s ease;
 
     &:hover{
         background-color: #ff1e1e;
